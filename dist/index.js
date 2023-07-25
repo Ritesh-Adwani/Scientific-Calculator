@@ -1,6 +1,6 @@
 "use strict";
 const input = document.querySelector("#input");
-const displayBtn = document.querySelectorAll(".display-btns");
+const displayBtns = document.querySelectorAll(".display-btns");
 const memRecall = document.querySelector("#mem-recall");
 const memClear = document.querySelector("#mem-clear");
 const memory = document.querySelector(".memory");
@@ -66,7 +66,7 @@ const result = () => {
 const backspace = () => (input.value = input.value.slice(0, input.value.length - 1));
 // Change Sign
 const changeSign = () => {
-    if (input.value.charAt(0) == "-")
+    if (input.value.charAt(0) === "-")
         input.value = input.value.slice(1);
     else
         input.value = "-" + input.value;
@@ -74,7 +74,7 @@ const changeSign = () => {
 //Factorial
 const factorial = () => {
     let num = Number(input.value);
-    if (num != Infinity && !isNaN(num)) {
+    if (num !== Infinity && !isNaN(num)) {
         let ans = 1;
         for (let i = 1; i <= num; i++)
             ans = ans * i;
@@ -126,13 +126,17 @@ const changeUnitOfAngle = () => {
     let val = input.value;
     let button = document.querySelector("#changeUnit");
     let unit = button.innerText;
-    if (unit == "DEG") {
-        val = (Number(val) * (180 / Math.PI)).toFixed(10).toString();
-        button.innerText = "RAD";
-    }
-    else if (unit == "RAD") {
-        val = (Number(val) * (Math.PI / 180)).toFixed(10).toString();
-        button.innerText = "DEG";
+    switch (unit) {
+        case "DEG":
+            val = (Number(val) * (180 / Math.PI)).toFixed(10).toString();
+            button.innerText = "RAD";
+            break;
+        case "RAD":
+            val = (Number(val) * (Math.PI / 180)).toFixed(10).toString();
+            button.innerText = "DEG";
+            break;
+        default:
+            break;
     }
     input.value = val;
 };
@@ -142,23 +146,27 @@ const changeToSecond = () => {
     let option = button.innerText;
     let shownElements = document.querySelectorAll(".shown-btns");
     let hidnElements = document.querySelectorAll(".hidn-btns");
-    if (option == "2nd") {
-        button.innerHTML = "1<sup>st</sup>";
-        shownElements.forEach((item) => {
-            item.style.display = "none";
-        });
-        hidnElements.forEach((item) => {
-            item.style.display = "block";
-        });
-    }
-    else if (option == "1st") {
-        button.innerHTML = "2<sup>nd</sup>";
-        shownElements.forEach((item) => {
-            item.style.display = "block";
-        });
-        hidnElements.forEach((item) => {
-            item.style.display = "none";
-        });
+    switch (option) {
+        case "2nd":
+            button.innerHTML = "1<sup>st</sup>";
+            shownElements.forEach((item) => {
+                item.style.display = "none";
+            });
+            hidnElements.forEach((item) => {
+                item.style.display = "block";
+            });
+            break;
+        case "1st":
+            button.innerHTML = "2<sup>nd</sup>";
+            shownElements.forEach((item) => {
+                item.style.display = "block";
+            });
+            hidnElements.forEach((item) => {
+                item.style.display = "none";
+            });
+            break;
+        default:
+            break;
     }
 };
 //Log to the base 2
@@ -185,19 +193,19 @@ const findCeil = () => {
 memory.addEventListener("click", (e) => {
     let id = e.target.id;
     let arr;
-    if (id == "mem-plus") {
+    if (id === "mem-plus") {
         let value = Number(input.value);
         value = value + Number(localStorage.getItem("arr"));
         localStorage.setItem("arr", JSON.stringify(value));
         input.value = "";
     }
-    else if (id == "mem-minus") {
+    else if (id === "mem-minus") {
         let value = Number(input.value);
         value = Number(localStorage.getItem("arr")) - value;
         localStorage.setItem("arr", JSON.stringify(value));
         input.value = "";
     }
-    else if (id == "mem-store") {
+    else if (id === "mem-store") {
         let value = Number(input.value);
         if (localStorage.getItem("arr") === null)
             arr = "";
@@ -207,10 +215,10 @@ memory.addEventListener("click", (e) => {
         enable();
         input.value = "";
     }
-    else if (id == "mem-recall") {
+    else if (id === "mem-recall") {
         input.value = localStorage.getItem("arr") || "".toString();
     }
-    else if (id == "mem-clear") {
+    else if (id === "mem-clear") {
         memClear.disabled = true;
         memRecall.disabled = true;
         localStorage.clear();
@@ -218,7 +226,7 @@ memory.addEventListener("click", (e) => {
     }
 });
 // Aliases for Buttons and Displaying input text
-displayBtn.forEach((item) => {
+displayBtns.forEach((item) => {
     item.addEventListener("click", (e) => {
         let btntext;
         const button = e.target;
