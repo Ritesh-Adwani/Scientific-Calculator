@@ -56,7 +56,7 @@ const result = (): void => {
   }
   input.value = input.value.replace(/(^|[^0-9])0+([0-9]+)/g, "$1$2"); // remove leading zeros from numbers in expression
 
-  const ans: string = eval(input.value).toFixed(10) as string;
+  const ans: string = eval(input.value) as string;
   input.value = ans;
 };
 

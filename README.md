@@ -1,10 +1,11 @@
-# Typescript-Practical
+# Scientific Calculator
 
 - This is a scientific calculator built using Typescript to ensure type safety.
 - Typescript is an open source language and is a superset of Tavascript.
 - It offers additional features to Javascript including static types.
 - Typescript code basically compiles down to regular Javascript.
 - Typescript is more robust, can easily spot bugs and provides better readability.
+- Live demonstration : [Scientific Calculator](https://ritesh-adwani.github.io/Scientific-Calculator/)
 
 ---
 
